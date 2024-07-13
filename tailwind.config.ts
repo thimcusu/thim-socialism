@@ -1,3 +1,4 @@
+import { NAV_HEIGHT_PX } from "@/utils/constants";
 import type { Config } from "tailwindcss";
 
 const config: Config = {
@@ -15,6 +16,12 @@ const config: Config = {
       fontFamily: {
         sans: ["var(--font-geist-sans)"],
         mono: ["var(--font-geist-mono)"],
+      },
+      height: {
+        "nav-height": "74px",
+      },
+      spacing: {
+        "nav-height": "74px",
       },
     },
   },
