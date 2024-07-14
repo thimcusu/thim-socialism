@@ -21,7 +21,7 @@ export default function RootLayout({
       <ClerkProvider>
         <body className={(inter.className, "h-full bg-slate-100 text-gray-800")}>
           <Navbar />
-          <div className="h-0 min-h-[calc(100%-74px)] md:px-8 lg:px-16 xl:px-32 2xl:px-64">{children}</div>
+          <div className="h-0 min-h-[calc(100%-74px)]">{children}</div>
         </body>
       </ClerkProvider>
     </html>
