@@ -63,8 +63,4 @@ const Navbar = () => {
   );
 };
 
-const LoginItem = () => {
-  return <div></div>;
-};
-
 export default Navbar;

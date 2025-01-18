@@ -10,13 +10,12 @@ import {
 } from "@/components/ui/dialog";
 import { Input } from "@/components/ui/input";
 import { addPost } from "@/lib/action";
-import prisma from "@/lib/client";
+import _prisma from "@/lib/client";
 import { useAuth } from "@clerk/nextjs";
-import { currentUser } from "@clerk/nextjs/server";
 import { DialogProps } from "@radix-ui/react-dialog";
 
 export function AddPostDialog(props: DialogProps) {
-  const { isLoaded, userId, sessionId, getToken } = useAuth();
+  const { isLoaded, userId } = useAuth();
   console.log(isLoaded, userId);
 
   if (userId === null) return null;
@@ -25,7 +24,7 @@ export function AddPostDialog(props: DialogProps) {
     <Dialog {...props}>
       <DialogTrigger asChild>
         <Button className="w-full" variant={"outline"}>
-          <span className="mr-auto">What's on your mind?</span>
+          <span className="mr-auto">What is on your mind?</span>
         </Button>
       </DialogTrigger>
       <DialogContent className="sm:max-w-[425px]">
@@ -40,7 +39,7 @@ export function AddPostDialog(props: DialogProps) {
                 id="post-input"
                 type="text"
                 defaultValue=""
-                placeholder="What's on your mind?"
+                placeholder="What is on your mind?"
                 className="col-span-4"
               />
             </div>
