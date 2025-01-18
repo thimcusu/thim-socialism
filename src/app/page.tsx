@@ -1,3 +1,5 @@
+import AddPost from "@/components/add-post";
+import Feed from "@/components/feed";
 import Stories from "@/components/Stories";
 
 const Homepage = () => {
@@ -7,9 +9,11 @@ const Homepage = () => {
       <div className="flex-auto">
         <div className="flex flex-col">
           <Stories />
+          <AddPost />
+          <Feed />
         </div>
       </div>
-      <div className="basis-[22%] hidden lg:block">Right Menu</div>
+      <div className="basis-[20%] hidden lg:block">Right Menu</div>
     </div>
   );
 };

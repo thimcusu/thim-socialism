@@ -3,7 +3,7 @@ import React from "react";
 import MobileMenu from "./MobileMenu";
 import Image from "next/image";
 import { ClerkLoaded, ClerkLoading, SignedIn, SignedOut, UserButton } from "@clerk/nextjs";
-import BasicSpinner from "./utils/Spinner";
+import BasicSpinner from "./ui/Spinner";
 
 const Navbar = () => {
   return (

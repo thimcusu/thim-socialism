@@ -1,10 +1,14 @@
 import type { Metadata } from "next";
-import { Inter } from "next/font/google";
+import { Inter as FontSans } from "next/font/google";
 import { ClerkProvider } from "@clerk/nextjs";
-import "./globals.css";
+import "../styles/globals.css";
 import Navbar from "@/components/Navbar";
+import { cn } from "@/lib/utils";
 
-const inter = Inter({ subsets: ["latin"] });
+const fontSans = FontSans({
+  subsets: ["latin"],
+  variable: "--font-sans",
+});
 
 export const metadata: Metadata = {
   title: "Thim Socialism App",
@@ -19,7 +23,7 @@ export default function RootLayout({
   return (
     <html lang="en" className="h-full">
       <ClerkProvider>
-        <body className={(inter.className, "h-full bg-slate-100 text-gray-800")}>
+        <body className={cn("h-full bg-background font-sans antialiased", fontSans.variable, "text-gray-800")}>
           <Navbar />
           <div className="h-0 min-h-[calc(100%-74px)]">{children}</div>
         </body>

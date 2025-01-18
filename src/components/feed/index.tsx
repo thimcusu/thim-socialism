@@ -1,10 +1,12 @@
-import React from "react";
+"use client";
+
+import FeedPost from "./FeedPost";
 
 const Feed = () => {
   return (
     <div>
-      <Feed />
-      <Feed />
+      <FeedPost />
+      <FeedPost />
     </div>
   );
 };

@@ -1,7 +1,7 @@
 import React from "react";
 
 const FeedPost = () => {
-  return <div>FeedPost</div>;
+  return <div className="flex">FeedPost</div>;
 };
 
 export default FeedPost;
