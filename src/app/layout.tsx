@@ -4,6 +4,7 @@ import { ClerkProvider } from "@clerk/nextjs";
 import "../styles/globals.css";
 import Navbar from "@/components/Navbar";
 import { cn } from "@/lib/utils";
+import { Toaster } from "@/components/ui/toaster";
 
 const fontSans = FontSans({
   subsets: ["latin"],
@@ -25,7 +26,8 @@ export default function RootLayout({
       <ClerkProvider>
         <body className={cn("h-full bg-background font-sans antialiased", fontSans.variable, "text-gray-800")}>
           <Navbar />
-          <div className="h-0 min-h-[calc(100%-74px)]">{children}</div>
+          <div className="h-0 min-h-[calc(100%-74px)] pt-[74px]">{children}</div>
+          <Toaster />
         </body>
       </ClerkProvider>
     </html>

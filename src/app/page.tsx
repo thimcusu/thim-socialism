@@ -5,11 +5,6 @@ export default function Home() {
     <div className="min-h-screen flex flex-col justify-between bg-brown-50 text-brown-900 font-sans">
       {/* Hero Section */}
 
-      <div
-        className="absolute inset-0 bg-cover bg-center opacity-40"
-        style={{ backgroundImage: "url(/hero-image.jpg)" }}
-      ></div>
-
       {/* About Section */}
       <section className="text-center px-8 py-16 bg-gray-50">
         <h2 className="text-3xl font-bold text-brown-900 mb-6">About Me</h2>
