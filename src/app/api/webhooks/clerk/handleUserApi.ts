@@ -12,7 +12,6 @@ import { UserJSON } from "@clerk/nextjs/server";
 export const createClerkUser = async (payload: UserJSON) => {
   const { username, email_addresses, image_url, first_name, last_name } = payload;
   const email = email_addresses[0].email_address;
-  console.log(payload);
 
   await prisma.user.create({
     data: {
