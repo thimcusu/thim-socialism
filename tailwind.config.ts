@@ -22,8 +22,30 @@ const config = {
       },
       spacing: {
         "nav-height": "74px",
+        128: "32rem",
+        144: "36rem",
       },
       colors: {
+        brown: {
+          50: "#f5f0eb",
+          100: "#e3d3c4",
+          200: "#d1b09d",
+          300: "#b18f75",
+          400: "#8f6d4f",
+          500: "#6e4c2a",
+          600: "#5b3a21",
+          700: "#49301a",
+          800: "#362417",
+          900: "#261810",
+        },
+        blue: {
+          600: "#4a90e2",
+          500: "#357ab7",
+        },
+        gray: {
+          50: "#fafafa",
+          900: "#333",
+        },
         border: "hsl(var(--border))",
         input: "hsl(var(--input))",
         ring: "hsl(var(--ring))",
@@ -62,6 +84,10 @@ const config = {
         lg: "var(--radius)",
         md: "calc(var(--radius) - 2px)",
         sm: "calc(var(--radius) - 4px)",
+      },
+      boxShadow: {
+        "2xl": "0 10px 15px rgba(0, 0, 0, 0.1), 0 4px 6px rgba(0, 0, 0, 0.1)",
+        outline: "0 0 0 3px rgba(66, 153, 225, 0.5)",
       },
       keyframes: {
         "accordion-down": {
