@@ -29,15 +29,25 @@ export default function BadWordsDetector() {
     // Create a case-insensitive regex from the BAD_WORDS list
     const regex = new RegExp(`\\b(${words.map((e) => e.text).join("|")})\\b`, "gi");
 
+    // Check if there are any bad words in the text
+    const containBadWords = regex.test(text);
+
     // Replace matched bad words with a highlighted span
     const highlightedText = text.replace(regex, "<mark>$&</mark>");
-    console.log(highlightedText);
-    if (contentRef.current) {
+
+    if (contentRef.current && containBadWords) {
       contentRef.current.innerHTML = highlightedText;
       toast({
         variant: "destructive",
         title: "Hư hỏng",
-        description: "Có vài từ hư hỏng",
+        description: "Có vài từ hư hỏng!",
+        duration: 5000,
+      });
+    } else {
+      toast({
+        variant: "default",
+        title: "Giỏi quá",
+        description: "Em bé dạo này ngoan và ít chửi bậy!",
         duration: 5000,
       });
     }
