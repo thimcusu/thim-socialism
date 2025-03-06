@@ -56,6 +56,14 @@ export default function BadWordsDetector() {
   return (
     <div className="min-h-screen flex items-center justify-center bg-gray-100 px-16 py-4">
       <div className="bg-white p-8 rounded-lg shadow-lg w-full min-w-full">
+        <h1 className="text-3xl font-bold text-gray-700 my-4">Bad Words Detector</h1>
+        <FileUploadForm setText={(input) => setText(input)} onCheck={handleCheckBadWords} />
+        <div
+          ref={contentRef}
+          className="container__mirror w-full min-h-[200px] p-2 text-sm font-normal border border-gray-300 rounded-md resize-y overflow-auto whitespace-pre-wrap"
+          contentEditable
+          onInput={handleContentChange}
+        />
         <div>
           <TagInput
             placeholder="Enter the word"
@@ -71,14 +79,6 @@ export default function BadWordsDetector() {
             setActiveTagIndex={setActiveTagIndex}
           />
         </div>
-        <h1 className="text-3xl font-bold text-gray-700 my-4">Bad Words Detector</h1>
-        <FileUploadForm setText={(input) => setText(input)} onCheck={handleCheckBadWords} />
-        <div
-          ref={contentRef}
-          className="container__mirror w-full min-h-[200px] p-2 text-sm font-normal border border-gray-300 rounded-md resize-y overflow-auto whitespace-pre-wrap"
-          contentEditable
-          onInput={handleContentChange}
-        />
       </div>
     </div>
   );
