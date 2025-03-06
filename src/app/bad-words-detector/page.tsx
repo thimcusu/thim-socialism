@@ -23,6 +23,7 @@ export default function BadWordsDetector() {
   const handleContentChange: FormEventHandler<HTMLDivElement> | undefined = (e) => {
     const inputText = e.currentTarget.innerHTML;
     setText(inputText);
+    handleCheckBadWords();
   };
 
   const handleCheckBadWords = () => {
