@@ -29,9 +29,8 @@ export default function BadWordsDetector() {
   const handleCheckBadWords = () => {
     // Create a case-insensitive regex from the BAD_WORDS list
     const regex = new RegExp(`\\b(${words.map((e) => e.text).join("|")})\\b`, "gi");
-
+    const containBadWords = words.some((word) => text.includes(word.text));
     // Check if there are any bad words in the text
-    const containBadWords = regex.test(text);
 
     // Replace matched bad words with a highlighted span
     const highlightedText = text.replace(regex, "<mark>$&</mark>");
