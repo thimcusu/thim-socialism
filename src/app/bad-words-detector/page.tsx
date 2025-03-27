@@ -23,13 +23,15 @@ export default function BadWordsDetector() {
   const handleContentChange: FormEventHandler<HTMLDivElement> | undefined = (e) => {
     const inputText = e.currentTarget.innerHTML;
     setText(inputText);
-    handleCheckBadWords();
   };
 
   const handleCheckBadWords = () => {
     // Create a case-insensitive regex from the BAD_WORDS list
-    const regex = new RegExp(`\\b(${words.map((e) => e.text).join("|")})\\b`, "gi");
-    const containBadWords = words.some((word) => text.includes(word.text));
+    const regex = new RegExp(`\\b(${words.map((e) => e.text).join("|")})`, "gi");
+    // const containBadWords = words.some((word) => text.includes(word.text));
+    const containBadWords = regex.test(text);
+    console.log(containBadWords, words, text);
+
     // Check if there are any bad words in the text
 
     // Replace matched bad words with a highlighted span
