@@ -5,6 +5,7 @@ import { FormEventHandler, useRef, useState } from "react";
 import { BAD_WORDS } from "./constants";
 import FileUploadForm from "./FileTextUpload";
 import { useToast } from "@/hooks/use-toast";
+import { getBadWordsInLocalStorage } from "./utils";
 
 export default function BadWordsDetector() {
   const { toast } = useToast();
@@ -12,10 +13,12 @@ export default function BadWordsDetector() {
   const contentRef = useRef<HTMLDivElement>(null);
 
   // Convert all words to lowercase, remove duplicates, and then return the array
-  const setOfBadWords = [...new Set(BAD_WORDS.map((word) => word.toLowerCase()))].map((word) => ({
-    id: word,
-    text: word,
-  }));
+  const setOfBadWords = [...new Set(getBadWordsInLocalStorage(BAD_WORDS).map((word) => word.toLowerCase()))].map(
+    (word) => ({
+      id: word,
+      text: word,
+    })
+  );
 
   const [words, setWords] = useState<Tag[]>(setOfBadWords);
   const [activeTagIndex, setActiveTagIndex] = useState<number | null>(null);
@@ -23,6 +26,11 @@ export default function BadWordsDetector() {
   const handleContentChange: FormEventHandler<HTMLDivElement> | undefined = (e) => {
     const inputText = e.currentTarget.innerHTML;
     setText(inputText);
+  };
+
+  const handleSetInputTag = (tags: Tag[]) => {
+    localStorage.setItem("badWords", JSON.stringify(tags.map((t) => t.text)));
+    setWords(tags);
   };
 
   const handleCheckBadWords = () => {
@@ -67,9 +75,7 @@ export default function BadWordsDetector() {
           <TagInput
             placeholder="Enter the word"
             tags={words}
-            setTags={(tags) => {
-              setWords(tags);
-            }}
+            setTags={handleSetInputTag}
             styleClasses={{
               input: "w-full sm:max-w-[350px]",
             }}
