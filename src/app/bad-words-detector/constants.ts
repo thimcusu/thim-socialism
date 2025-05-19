@@ -1,4 +1,4 @@
-const BAD_WORDS: string[] = [
+export const BAD_WORDS: string[] = [
   "Hate",
   "Hates",
   "Hateed",
