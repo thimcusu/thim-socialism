@@ -1,7 +1,7 @@
 "use client";
 
 import { Tag, TagInput } from "emblor";
-import { FormEventHandler, useRef, useState } from "react";
+import { FormEventHandler, SetStateAction, useRef, useState } from "react";
 import { BAD_WORDS } from "./constants";
 import FileUploadForm from "./FileTextUpload";
 import { useToast } from "@/hooks/use-toast";
@@ -28,9 +28,11 @@ export default function BadWordsDetector() {
     setText(inputText);
   };
 
-  const handleSetInputTag = (tags: Tag[]) => {
-    localStorage.setItem("badWords", JSON.stringify(tags.map((t) => t.text)));
-    setWords(tags);
+  const handleSetInputTag = (newTags: SetStateAction<Tag[]>) => {
+    const updatedTags: Tag[] = typeof newTags === "function" ? newTags(words) : newTags;
+
+    localStorage.setItem("badWords", JSON.stringify(updatedTags.map((t) => t.text)));
+    setWords(newTags);
   };
 
   const handleCheckBadWords = () => {
