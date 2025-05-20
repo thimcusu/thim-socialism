@@ -5,12 +5,24 @@ import { FormEventHandler, SetStateAction, useRef, useState } from "react";
 import { BAD_WORDS } from "./constants";
 import FileUploadForm from "./FileTextUpload";
 import { useToast } from "@/hooks/use-toast";
-import { getBadWordsInLocalStorage } from "./utils";
 
 export default function BadWordsDetector() {
   const { toast } = useToast();
   const [text, setText] = useState<string>("");
   const contentRef = useRef<HTMLDivElement>(null);
+
+  const getBadWordsInLocalStorage = (fixedBadWords: string[]): string[] => {
+    const raw = typeof window !== "undefined" ? window.localStorage.getItem("badWords") : null;
+
+    const badWords = typeof raw === "string" ? JSON.parse(raw) : null;
+    if (badWords && Array.isArray(badWords)) {
+      return badWords;
+    }
+
+    localStorage.setItem("badWords", JSON.stringify(fixedBadWords));
+
+    return fixedBadWords;
+  };
 
   // Convert all words to lowercase, remove duplicates, and then return the array
   const setOfBadWords = [...new Set(getBadWordsInLocalStorage(BAD_WORDS).map((word) => word.toLowerCase()))].map(
