@@ -1,3 +1,4 @@
+export const STRICT_BAD_WORDS: string[] = ["Cut"];
 export const BAD_WORDS: string[] = [
   "Hate",
   "Hates",

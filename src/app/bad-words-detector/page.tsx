@@ -2,7 +2,7 @@
 
 import { Tag, TagInput } from "emblor";
 import { FormEventHandler, SetStateAction, useEffect, useRef, useState } from "react";
-import { BAD_WORDS } from "./constants";
+import { BAD_WORDS, STRICT_BAD_WORDS } from "./constants";
 import FileUploadForm from "./FileTextUpload";
 import { useToast } from "@/hooks/use-toast";
 import { getBadWordsInLocalStorage } from "./utils";
@@ -39,20 +39,31 @@ export default function BadWordsDetector() {
   };
 
   const handleCheckBadWords = () => {
-    // Create a case-insensitive regex from the BAD_WORDS list
-    const regex = new RegExp(`\\b(${words.map((e) => e.text).join("|")})\\b`, "gi");
-    // Check if there are any bad words in the text
-    const containBadWords = regex.test(text);
+    const badWordRegex = new RegExp(`\\b(${words.map((e) => e.text).join("|")})\\b`, "gi");
+    const strictRegex = new RegExp(`(${STRICT_BAD_WORDS.join("|")})`, "gi");
 
-    // Replace matched bad words with a highlighted span
-    const highlightedText = text.replace(regex, "<mark>$&</mark>");
+    const containBadWords = badWordRegex.test(text);
+    const containStrictBadWords = strictRegex.test(text);
 
-    if (contentRef.current && containBadWords) {
-      contentRef.current.innerHTML = highlightedText;
+    // Step 1: highlight whole-word bad words
+    let markedText = text.replace(badWordRegex, "<mark>$&</mark>");
+
+    // Step 2: highlight strict bad words in unmarked areas
+    const parts = markedText.split(/(<mark>.*?<\/mark>)/);
+    markedText = parts
+      .map((part) => {
+        if (part.startsWith("<mark>")) return part;
+        return part.replace(strictRegex, (match) => `<mark>${match}</mark>`);
+      })
+      .join("");
+
+    // Show toast and inject HTML
+    if (contentRef.current && (containBadWords || containStrictBadWords)) {
+      contentRef.current.innerHTML = markedText;
       toast({
         variant: "destructive",
         title: "Hư hỏng",
-        description: "Có vài từ hư hỏng!",
+        description: containStrictBadWords ? "Có từ nhạy cảm nghiêm trọng!" : "Có vài từ hư hỏng!",
         duration: 5000,
       });
     } else {
